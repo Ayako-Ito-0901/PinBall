@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrightnessRegulator : MonoBehaviour
 {
-    //Materialを入れる　★これがわからない
+    //Materialを入れる　★これは初期化？
     Material myMaterial;
 
     //Emissionの最小値
@@ -21,7 +21,7 @@ public class BrightnessRegulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //タグによって光らせる色を変える
+        //タグによって光らせる色を変える　★タグってどうやって取得している？
         if(tag == "SmallStarTag") {
             this.defaultColor = Color.white;
         }
@@ -32,7 +32,8 @@ public class BrightnessRegulator : MonoBehaviour
             this.defaultColor = Color.cyan;
         }
 
-        //オブジェクトにアタッチしているMaterialを取得 ★このオブジェクトというのはボールのこと？
+        //オブジェクトにアタッチしているMaterialを取得 雲やスターのマテリアルを取得★
+        //コンポーネントRendererを取得
         this.myMaterial = GetComponent<Renderer> ().material;
 
         //オブジェクトの最初の色を設定　Materialクラスの「SetColor」関数は、マテリアルの色を設定

@@ -14,7 +14,7 @@ public class BallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //シーン中のGameOverTextオブジェクトを取得
+        //シーン中のGameOverTextオブジェクトを取得する
         this.gameoverText = GameObject.Find("GameOverText");
     }
 
