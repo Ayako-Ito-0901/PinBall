@@ -15,6 +15,7 @@ public class FripperController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //HingeJoinコンポーネント取得フリッパーを動かすためには、フリッパーにアタッチしているHinge Jointをスクリプトから操作するため
         //「GetComponent」関数は、ゲームオブジェクトにアタッチしているコンポーネントを取得します。何のコンポーネントを取得するかは、GetComponentに続く「<>」内で指定
         this.myHingeJoint = GetComponent<HingeJoint>();
