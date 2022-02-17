@@ -12,6 +12,9 @@ public class FripperController : MonoBehaviour
     //弾いた時の動き
     private float flickAngle = -20;
 
+    //タップで追加
+    TapCheck tapCheck;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,31 +24,36 @@ public class FripperController : MonoBehaviour
         this.myHingeJoint = GetComponent<HingeJoint>();
         //フリッパーの傾きを設定
         SetAngle(this.defaultAngle);
+
+        //タップで追加
+        this.tapCheck = new TapCheck();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //左矢印キーを押した時左フリッパーを動かす
-        //「Input.GetKeyDown」は引数のキーが押された時にtrueを返す
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
-            SetAngle(this.flickAngle);
+        //タップで追加
+        bool[] resultArray = tapCheck.GetLrPos();
+
+        if(tag == "RightFripperTag") {
+            if(Input.GetKeyDown(KeyCode.RightArrow) || resultArray[0] == true) {
+                SetAngle(this.flickAngle);
+            }
+            else {
+                SetAngle(this.defaultAngle);
+            }
         }
 
-        //右矢印キーを押した時右フリッパーを動かす
-        if(Input.GetKeyDown(KeyCode.RightArrow) && tag == "RightFripperTag") {
-            SetAngle(this.flickAngle);
+        if(tag == "LeftFripperTag") {
+            if(Input.GetKeyDown(KeyCode.LeftArrow) || resultArray[1] == true) {
+                SetAngle(this.flickAngle);
+            }
+            else {
+                SetAngle(this.defaultAngle);
+            }
         }
 
-        //矢印キーが離された時フリッパーを元に戻す
-        //「Input.GetKeyUp」は引数のキーが離された時にtrueを返す
-        //「Input.GetKey」は引数のキーが押されている間、常にtrueを返
-        if(Input.GetKeyUp(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
-            SetAngle(this.defaultAngle);
-        }
-        if(Input.GetKeyUp(KeyCode.RightArrow) && tag == "RightFripperTag") {
-            SetAngle(this.defaultAngle);
-        }
     }
 
     //フリッパーの傾きを設定 JointSpringクラスを使ってバネが戻ろうとする位置をangle引数で設定
