@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrightnessRegulator : MonoBehaviour
 {
-    //Materialを入れる　★これは初期化？
+    //Materialを入れる
     Material myMaterial;
 
     //Emissionの最小値
@@ -21,7 +21,7 @@ public class BrightnessRegulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //タグによって光らせる色を変える　★タグってどうやって取得している？
+        //タグによって光らせる色を変える　★tagでこのスクリプトがアタッチされているタグが取得できる
         if(tag == "SmallStarTag") {
             this.defaultColor = Color.white;
         }

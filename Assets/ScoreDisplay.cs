@@ -5,8 +5,7 @@ using UnityEngine.UI; //追記。スクリプトでUIを操作する場合は、
 
 public class ScoreDisplay : MonoBehaviour
 {
-    //Materialを入れる
-    Material myMaterial;
+    
     //スコアテキストの初期化
     private GameObject scoreText;
     //スコアの初期化
@@ -17,13 +16,12 @@ public class ScoreDisplay : MonoBehaviour
     //点数
     private int smallCloudScore = 10; //小さな雲
     private int largeCloudScore = 30; //大きな雲
+    private int largeStarScore = 5; //大きな星
+    private int smallStarScore = 1; //小さな星
 
     // Start is called before the first frame update
     void Start()
     {
-        //オブジェクトにアタッチしているMaterialを取得
-        this.myMaterial = GetComponent<Renderer> ().material;
-
         //シーン中のGameOverTextオブジェクトを取得する
         this.scoreText = GameObject.Find("ScoreText");
     }
@@ -43,6 +41,12 @@ public class ScoreDisplay : MonoBehaviour
         }
         else if(yourTag == "SmallCloudTag") {
             score += smallCloudScore;
+        }
+        else if(yourTag == "SmallStarTag") {
+            score += smallStarScore;
+        }
+        else if(yourTag == "LargeStarTag") {
+            score += largeStarScore;
         }
         
         this.scoreText.GetComponent<Text> ().text = "Score:" + score;

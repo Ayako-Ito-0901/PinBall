@@ -323,6 +323,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1138263969249511604, guid: 61ffc9fc825d59942b3c38e6d7f2e077, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1498310528208071009, guid: 61ffc9fc825d59942b3c38e6d7f2e077, type: 3}
       propertyPath: m_Name
       value: SmallCloud (1)
@@ -2309,6 +2313,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 177187763673688380, guid: 987aa94fa090e624e9d95c0ee5cc7ed8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1314579992273687123, guid: 987aa94fa090e624e9d95c0ee5cc7ed8, type: 3}
       propertyPath: m_RootOrder
       value: 12

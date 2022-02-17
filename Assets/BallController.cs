@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour
     //ボールが見える可能性のあるz軸の最小値
     private float visiblePosZ = -6.5f;
 
-    //ゲームオーバーを表示するテキスト初期化　★初期化でよいか、空のオブジェクトを作っている？
+    //ゲームオーバーを表示するテキスト初期化
     private GameObject gameoverText;
 
     // Start is called before the first frame update
