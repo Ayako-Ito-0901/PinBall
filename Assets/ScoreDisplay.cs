@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; //追記。スクリプトでUIを操作する場合は、「using UnityEngine.UI;」を記述する。
 
 public class ScoreDisplay : MonoBehaviour
 {
-    
+    ScoreContainer scoreContainer; //ScoreContainerを使いますよという宣言
+
     //スコアテキストの初期化
     private GameObject scoreText;
-    //スコアの初期化
-    int score = 0;
 
     string test = "";
 
@@ -22,8 +20,10 @@ public class ScoreDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //シーン中のGameOverTextオブジェクトを取得する
+        //シーン中のscoreTextオブジェクトを取得する
         this.scoreText = GameObject.Find("ScoreText");
+        //scoreText中のScoreContainerコンポーネントの取得 ScoreContainerの関数を使うために。
+        scoreContainer = scoreText.GetComponent<ScoreContainer>();
     }
 
     // Update is called once per frame
@@ -35,20 +35,18 @@ public class ScoreDisplay : MonoBehaviour
     //衝突時に呼ばれる関数
     void OnCollisionEnter(Collision collision) {
         string yourTag = collision.gameObject.tag;
-        Debug.Log(collision.gameObject.tag);
+
         if(yourTag == "LargeCloudTag") {
-            score += largeCloudScore;
+            scoreContainer.AddScore(largeCloudScore);
         }
         else if(yourTag == "SmallCloudTag") {
-            score += smallCloudScore;
+            scoreContainer.AddScore(smallCloudScore);
         }
         else if(yourTag == "SmallStarTag") {
-            score += smallStarScore;
+            scoreContainer.AddScore(smallStarScore);
         }
         else if(yourTag == "LargeStarTag") {
-            score += largeStarScore;
+            scoreContainer.AddScore(largeStarScore);
         }
-        
-        this.scoreText.GetComponent<Text> ().text = "Score:" + score;
     }
 }
