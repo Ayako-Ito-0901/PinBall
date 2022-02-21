@@ -12,9 +12,6 @@ public class FripperController : MonoBehaviour
     //弾いた時の動き
     private float flickAngle = -20;
 
-    //タップで追加
-    TapCheck tapCheck;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,33 +21,53 @@ public class FripperController : MonoBehaviour
         this.myHingeJoint = GetComponent<HingeJoint>();
         //フリッパーの傾きを設定
         SetAngle(this.defaultAngle);
-
-        //タップで追加
-        this.tapCheck = new TapCheck();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        //タップで追加
-        bool[] resultArray = tapCheck.GetLrPos();
-
-        if(tag == "RightFripperTag") {
-            if(Input.GetKeyDown(KeyCode.RightArrow) || resultArray[0] == true) {
-                SetAngle(this.flickAngle);
-            }
-            else {
-                SetAngle(this.defaultAngle);
-            }
+        //左矢印キーを押した時左フリッパーを動かす
+        //「Input.GetKeyDown」は引数のキーが押された時にtrueを返す
+        if(Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
+            SetAngle(this.flickAngle);
         }
 
-        if(tag == "LeftFripperTag") {
-            if(Input.GetKeyDown(KeyCode.LeftArrow) || resultArray[1] == true) {
-                SetAngle(this.flickAngle);
-            }
-            else {
-                SetAngle(this.defaultAngle);
+        //右矢印キーを押した時右フリッパーを動かす
+        if(Input.GetKeyDown(KeyCode.RightArrow) && tag == "RightFripperTag") {
+            SetAngle(this.flickAngle);
+        }
+
+        //矢印キーが離された時フリッパーを元に戻す
+        //「Input.GetKeyUp」は引数のキーが離された時にtrueを返す
+        //「Input.GetKey」は引数のキーが押されている間、常にtrueを返
+        if(Input.GetKeyUp(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
+            SetAngle(this.defaultAngle);
+        }
+        if(Input.GetKeyUp(KeyCode.RightArrow) && tag == "RightFripperTag") {
+            SetAngle(this.defaultAngle);
+        }
+
+        //タップされた場合の処理
+        if (Input.touchCount > 0) {
+            for(int i = 0; i <= Input.touchCount-1; i++) {
+                Touch touch = Input.GetTouch(i);
+                if(touch.position.x >= Screen.width/2) { //端末の横幅を求めるscreenクラス
+                    if(touch.phase == TouchPhase.Began && tag == "RightFripperTag") {
+                        SetAngle(this.flickAngle);
+                    }
+                    if(touch.phase == TouchPhase.Ended && tag == "RightFripperTag") {
+                        SetAngle(this.defaultAngle);
+                    }
+                }
+                else {
+                    if(touch.phase == TouchPhase.Began && tag == "LeftFripperTag") {
+                        SetAngle(this.flickAngle);
+                    }
+                    if(touch.phase == TouchPhase.Ended && tag == "LeftFripperTag") {
+                        SetAngle(this.defaultAngle);
+                    }
+                }
             }
         }
 
